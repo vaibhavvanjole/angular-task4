@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-sm-12 my-4">
+        <form (ngSubmit)="onSubmit()" [formGroup]="formObj">
+            <div class="form-row">
+                <div class="col-sm-5">
+                    <label for="bx1">Box1</label>
+                </div>
+                <div class="col-sm-5">
+                    <label for="bx1">Box2</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" id="bx1" formControlName="firstValue" (blur)="patchValueBox2()">
+                  <small *ngIf="formObj.get('firstValue').invalid && formObj.get('firstValue').touched" class="text-danger">
+                    <span *ngIf="formObj.get('firstValue')?.errors?.['max'] || formObj.get('firstValue')?.errors?.['min'] || formObj.get('firstValue')?.errors?.['pattern']">Incorrect Value</span>
+                  </small>
+                </div>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" id="bx2" formControlName="secondValue" (blur)="patchValueBox1()">
+                  <small *ngIf="formObj.get('secondValue').invalid && formObj.get('secondValue').touched" class="text-danger">
+                    <span *ngIf="formObj.get('secondValue')?.errors?.['max'] || formObj.get('secondValue')?.errors?.['min'] || formObj.get('secondValue')?.errors?.['pattern']">Incorrect Value</span>
+                  </small>
+                </div>
+                <div class="col-sm-2">
+                   <button type="submit" class="btn btn-primary" [disabled]="!formObj.valid">Create Chart</button>
+                  </div>
+              </div>
+        </form>
+    </div>
+    <div class="col-sm-12 demoChart">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
